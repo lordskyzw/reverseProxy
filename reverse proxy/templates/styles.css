@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /*background-color: #f4f4f4;*/
+    background-image: url("media/hitbg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.sign-in-container {
+    background: rgba(255, 255, 255, 0.85); /* Fallback semi-transparent white background */
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Modern browsers with backdrop-filter support */
+@supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
+    .sign-in-container {
+        background: rgba(255, 255, 255, 0.5); /* Reduced opacity for acrylic effect */
+        -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+        backdrop-filter: blur(10px); /* This will give the frosted glass effect */
+    }
+}
+
+
+.logo-container h1 {
+    color: #003399; /* Blue color for HIT */
+    text-align: center;
+}
+
+.logo-container p {
+    color: #ffcc00; /* Yellow color for the slogan */
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 1em;
+}
+
+.form-group label {
+    display: block;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5em;
+    margin-top: 0.5em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 1em;
+    border: none;
+    background-color: #003399;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1em;
+}
+
+button:hover {
+    background-color: #002266;
+}
+
+.links {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.links a {
+    color: #003399;
+    text-decoration: none;
+    margin: 0 0.5em;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}

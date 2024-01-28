@@ -1,0 +1,12 @@
+implement a paywall which directs all traffic from the internet to the main site (filter traffic from internet vs)
+
+add a mock up of students
+
+
+new approach:
+use docker-compose to run the whole thing
+here is the whole thing:
+```the flask instances will be replicated by docker compose
+there shall be one front facing nginx instance
+use cloud storage for storing the documents (s3)
+implement a paywall which directs all traffic from the internet to the main site (filter traffic from internet vs)

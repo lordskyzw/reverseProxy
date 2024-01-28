@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Resources</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            justify-content: space-around;
+        }
+        .resource {
+            margin: 10px;
+            text-align: center;
+        }
+        .resource img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+        .resource a {
+            text-decoration: none;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h2>E-Resources</h2>
+    <div class="container">
+        <!-- Sample Resource 1 -->
+        <div class="resource">
+            <a href="/proxy/resource1" target="_blank">
+                <img src="https://via.placeholder.com/150" alt="Resource 1">
+                <div>Resource 1</div>
+                <p>Short description of Resource 1.</p>
+            </a>
+        </div>
+
+        <!-- Sample Resource 2 -->
+        <div class="resource">
+            <a href="/proxy/resource2" target="_blank">
+                <img src="https://via.placeholder.com/150" alt="Resource 2">
+                <div>Resource 2</div>
+                <p>Short description of Resource 2.</p>
+            </a>
+        </div>
+
+        <!-- More resources can be added in similar fashion -->
+    </div>
+</body>
+</html>
