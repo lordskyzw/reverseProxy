@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, session, flash, render_template
+from flask import Flask, request, redirect, session, flash, render_template, Response
 import requests
 from flask_sqlalchemy import SQLAlchemy
 import logging
@@ -67,10 +67,15 @@ def forward_request_to_server(path):
 
     # Forward the request to the selected server
     # Note: might need to include additional headers or data based on your specific requirements
-    response = requests.get(url)
+    resp = requests.get(url)
+    response = Response(resp.iter_content(), status=resp.status_code)
+     # Copy relevant headers
+    excluded_headers = ['content-encoding', 'content-length', 'transfer-encoding', 'connection']
+    headers = [(name, value) for (name, value) in resp.raw.headers.items() if name.lower() not in excluded_headers]
+    for header in headers:
+        response.headers[header[0]] = header[1]
 
-    # Return the response from the server to the original client
-    return response.content, response.status_code, response.headers.items()
+    return response
 
 def validate_credentials(username, password):
     user = User.query.filter_by(username=username).first()
