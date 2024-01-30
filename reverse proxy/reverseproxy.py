@@ -13,7 +13,11 @@ class User(db.Model):
 
 
 
-servers = ["http://127.0.0.1:5000", "http://127.0.0.1:5001", "http://127.0.0.1:5002", "http://127.0.0.1:5003"] #container urls
+servers = [
+    "http://127.0.0.1:8001",
+    "http://127.0.0.1:8002",
+    "http://127.0.0.1:8003"
+]
 current_server = 0
 
 @app.route('/<path:path>', methods=['GET'])
