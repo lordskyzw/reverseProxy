@@ -1,6 +1,9 @@
 from flask import Flask, request, redirect, session, flash, render_template
 import requests
 from flask_sqlalchemy import SQLAlchemy
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///yourdatabase.db'
@@ -14,9 +17,9 @@ class User(db.Model):
 
 
 servers = [
-    "http://127.0.0.1:8001",
-    "http://127.0.0.1:8002",
-    "http://127.0.0.1:8003"
+    "http://server-webapp1-1:80",
+    "http://server-webapp2-1:80",
+    "http://server-webapp3-1:80"
 ]
 current_server = 0
 
@@ -24,6 +27,8 @@ current_server = 0
 def handle_request(path):
     global current_server
     client_ip = request.remote_addr  # Get the client IP address
+    logging.info("client ip is ================%s", client_ip)
+    print(f"client ip is{client_ip}")
 
     # Assuming you have a function to check if IP is from university
     if is_university_network(client_ip):
@@ -56,17 +61,13 @@ def forward_request_to_server(path):
     current_server = (current_server + 1) % len(servers)
 
     # Construct the full URL to forward the request to
-    url = f"{server}/{path}"
+    url = f"{server}/files/{path}"
+    logging.info("sending path========================: %s", path)
+    logging.info("FULL URL==============================: %s", url)
 
     # Forward the request to the selected server
     # Note: might need to include additional headers or data based on your specific requirements
-    response = requests.request(
-        method=request.method,
-        url=url,
-        headers={key: value for (key, value) in request.headers if key != 'Host'},
-        data=request.get_data(),
-        cookies=request.cookies,
-        allow_redirects=False)
+    response = requests.get(url)
 
     # Return the response from the server to the original client
     return response.content, response.status_code, response.headers.items()
@@ -79,7 +80,7 @@ def validate_credentials(username, password):
 
 def is_university_network(ip_address):
     # Example list of university IP ranges or specific IPs
-    university_ips = ['127.0.0.1', '192.168.1.1', '192.168.1.2']  # Replace with actual university IPs or ranges
+    university_ips = ['127.0.0.1', '192.168.1.1', '192.168.1.2', '172.17.0.1']  # Replace with actual university IPs or ranges
     university_ip_ranges = [('192.168.1.100', '192.168.1.200')]  # Example IP range
 
     # Check if the IP is in the list of specific IPs

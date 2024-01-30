@@ -1,0 +1,14 @@
+version: '3'
+services:
+  webapp1:
+    build: .
+    ports:
+      - "8001:80"
+  webapp2:
+    build: .
+    ports:
+      - "8002:80"
+  webapp3:
+    build: .
+    ports:
+      - "8003:80"
