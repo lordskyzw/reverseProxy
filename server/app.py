@@ -9,7 +9,7 @@ app = FastAPI()
 
 # AWS S3 Configuration
 AWS_ACCESS_KEY_ID = 'AKIATCKAQNC5OYCUN2N6'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_SECRET_ACCESS_KEY = ''
 BUCKET_NAME = 'chumbucketzw'
 
 # Initialize S3 client outside the request handler
