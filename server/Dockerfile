@@ -15,6 +15,8 @@ EXPOSE 80
 
 # Define environment variable
 ENV NAME World
+ENV AWS_ACCESS_KEY_ID=AKIATCKAQNC5O5O3O5HE
+ENV AWS_SECRET_ACCESS_KEY=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
 
 # Run app.py when the container launches
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "80"]
