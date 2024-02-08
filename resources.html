@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Resources</title>
+    <title>School Library</title>
     <style>
         .container {
             display: flex;
@@ -14,28 +14,49 @@
         .resource {
             margin: 10px;
             text-align: center;
+            width: 250px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
         }
         .resource img {
             width: 150px;
             height: 150px;
             border-radius: 10px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         .resource a {
             text-decoration: none;
             color: #333;
         }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .pagination button {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .pagination button:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
 <body>
-    <h2>E-Resources</h2>
+    <h2>School Library</h2>
     <div class="container">
         <!-- Sample Resource 1 -->
         <div class="resource">
             <a href="http://localhost:5000/todo.txt" target="_blank" rel="noopener">
                 <img src="https://via.placeholder.com/150" alt="Resource 1">
-                <div>Resource 1</div>
-                <p>Short description of Resource 1.</p>
+                <div>Book 1</div>
+                <p>Short description of Book 1.</p>
             </a>
         </div>
 
@@ -43,12 +64,22 @@
         <div class="resource">
             <a href="http://localhost:5000/Tarmica Alshari-Cicuit.pdf" target="_blank" rel="noopener">
                 <img src="https://via.placeholder.com/150" alt="Resource 2">
-                <div>Resource 2</div>
-                <p>Short description of Resource 2.</p>
+                <div>Book 2</div>
+                <p>Short description of Book 2.</p>
             </a>
         </div>
 
         <!-- More resources can be added in similar fashion -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+        <button>&laquo; Prev</button>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>4</button>
+        <button>Next &raquo;</button>
     </div>
 </body>
 </html>
