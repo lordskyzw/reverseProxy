@@ -4,6 +4,8 @@ from botocore.exceptions import ClientError
 from aiobotocore.session import get_session
 import logging
 import os
+import mimetypes
+import boto3
 
 logging.basicConfig(level=logging.INFO)
 
@@ -19,18 +21,28 @@ session = get_session()
 client = session.create_client('s3', region_name='us-east-1',
                                aws_secret_access_key=aws_secret_access_key,
                                aws_access_key_id=aws_access_key_id)
+
+                       
+s3 = boto3.client('s3', aws_access_key_id=aws_access_key_id , aws_secret_access_key=aws_secret_access_key)
+
+
+
+
 @app.get("/files/{file_name}")
 async def read_file(file_name: str):
     logging.info("Fetching file %s", file_name)
     path = f"example/{file_name}"
     try:
-        response = client.get_object(Bucket=BUCKET_NAME, Key=path)
-        content = response['Body'].read()
+        ob = s3.get_object(Bucket=BUCKET_NAME, Key=path)
+        content = ob['Body'].read()
+        media_type, _ = mimetypes.guess_type(file_name)
+        if not media_type:
+            media_type = "application/octet-stream"  # Default to binary data if MIME type cannot be determined
 
         headers = {"Content-Disposition": f"attachment; filename={file_name}"}
         logging.info("File %s fetched successfully", file_name)
         
-        return Response(content=content, media_type="application/octet-stream", headers=headers)
+        return Response(content=content, media_type=media_type, headers=headers)
         
     except ClientError as e:
         logging.error("Error: %s", e)
