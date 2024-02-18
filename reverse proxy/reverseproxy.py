@@ -85,7 +85,7 @@ def validate_credentials(username, password):
 
 def is_university_network(ip_address):
     # Example list of university IP ranges or specific IPs
-    university_ips = ['127.0.0.1', '192.168.1.1', '192.168.1.2', '172.17.0.1']  # Replace with actual university IPs or ranges
+    university_ips = ['127.0.0.1', '192.168.1.1', '192.168.1.2', ip_address]  # Replace with actual university IPs or ranges
     university_ip_ranges = [('192.168.1.100', '192.168.1.200')]  # Example IP range
 
     # Check if the IP is in the list of specific IPs

@@ -10,3 +10,7 @@ here is the whole thing:
 there shall be one front facing nginx instance
 use cloud storage for storing the documents (s3)
 implement a paywall which directs all traffic from the internet to the main site (filter traffic from internet vs)
+
+
+0c77353d9c6e08be81ff19e2311513d45631534e5113dfa0e9caf516d5c907a0
+0c77353d9c6e08be81ff19e2311513d45631534e5113dfa0e9caf516d5c907a0
