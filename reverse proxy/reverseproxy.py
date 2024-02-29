@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///reverse.db'
 app.secret_key = 'my_secret_key_nigga'
 db = SQLAlchemy(app)
 class User(db.Model):
