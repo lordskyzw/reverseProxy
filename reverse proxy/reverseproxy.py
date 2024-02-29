@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///yourdatabase.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/database.db'
 app.secret_key = 'my_secret_key_nigga'
 db = SQLAlchemy(app)
 class User(db.Model):
@@ -85,7 +85,7 @@ def validate_credentials(username, password):
 
 def is_university_network(ip_address):
     # Example list of university IP ranges or specific IPs
-    university_ips = ['127.0.0.1', '192.168.1.1', '192.168.1.2', ip_address]  # Replace with actual university IPs or ranges
+    university_ips = ['192.168.1.1', '192.168.1.2']  # Replace with actual university IPs or ranges
     university_ip_ranges = [('192.168.1.100', '192.168.1.200')]  # Example IP range
 
     # Check if the IP is in the list of specific IPs
