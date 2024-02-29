@@ -43,6 +43,8 @@ def sign_in():
     if request.method == 'POST':
         username = request.form['username']  # Changed from 'email' to 'username'
         password = request.form['password']
+        logging.info("username is ================%s", username)
+        logging.info("password is ================%s", password)
         if validate_credentials(username, password):
             # Credentials are valid, retrieve the saved path and forward the request
             path = session.pop('requested_resource', None)
@@ -79,6 +81,8 @@ def forward_request_to_server(path):
 
 def validate_credentials(username, password):
     user = User.query.filter_by(username=username).first()
+    logging.info("FROM validate_credentials():::user is ================%s", user)
+    logging.info("FROM validate_credentials():::password is ================%s", user.password)
     if user and user.password == password:  # In a real app, use hashed passwords
         return True
     return False
