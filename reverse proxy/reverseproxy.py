@@ -41,7 +41,7 @@ def handle_request(path):
 @app.route('/sign-in', methods=['GET', 'POST'])
 def sign_in():
     if request.method == 'POST':
-        username = request.form['username']
+        username = request.form['username']  # Changed from 'email' to 'username'
         password = request.form['password']
         if validate_credentials(username, password):
             # Credentials are valid, retrieve the saved path and forward the request

@@ -1,11 +1,33 @@
 document.getElementById('signInForm').addEventListener('submit', function(event) {
     event.preventDefault();
+    
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     
-    // Here you would handle the sign in, for example sending it to a server
-    console.log('Email:', email, 'Password:', password);
+    // Construct form data
+    var formData = new FormData();
+    formData.append('username', email);
+    formData.append('password', password);
     
-    // For demonstration purposes, just show an alert
-    alert('Sign In Successful (not really, just a placeholder)');
+    // Send the form data to the Flask sign-in route using fetch
+    fetch('/sign-in', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        } else {
+            throw new Error('Sign in failed');
+        }
+    })
+    .then(text => {
+        console.log(text); // Handle the response text
+        alert('Sign In Successful');
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Sign In Failed');
+    });
 });
+
