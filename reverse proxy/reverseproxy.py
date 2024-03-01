@@ -1,19 +1,11 @@
 from flask import Flask, request, redirect, session, flash, render_template, Response
 import requests
-from flask_sqlalchemy import SQLAlchemy
 import logging
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///reverse.db'
 app.secret_key = 'my_secret_key_nigga'
-db = SQLAlchemy(app)
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(80), nullable=False)
-
 
 
 servers = [
@@ -23,37 +15,48 @@ servers = [
 ]
 current_server = 0
 
+example_creds = {'username':'student@gmail.com', 'password':'studentpassword'}
+
+
 @app.route('/<path:path>', methods=['GET'])
 def handle_request(path):
     global current_server
     client_ip = request.remote_addr  # Get the client IP address
     logging.info("client ip is ================%s", client_ip)
-    print(f"client ip is{client_ip}")
+    if path!='todo.txt':
+        session['requested_resource'] = 'todo.txt'
+    else:
+        session['requested_resource'] = path
+        
 
-    # Assuming you have a function to check if IP is from university
     if is_university_network(client_ip):
         return forward_request_to_server(path)
     else:
-        # Save the requested path in the session for later retrieval
-        session['requested_resource'] = path
         return redirect('/sign-in')
 
 @app.route('/sign-in', methods=['GET', 'POST'])
 def sign_in():
     if request.method == 'POST':
-        username = request.form['username']  # Changed from 'email' to 'username'
-        password = request.form['password']
+        username = request.form.get('username')
+        password = request.form.get('password')
         logging.info("username is ================%s", username)
         logging.info("password is ================%s", password)
-        if validate_credentials(username, password):
+        if validate_credentials(username, password)==True:
             # Credentials are valid, retrieve the saved path and forward the request
-            path = session.pop('requested_resource', None)
-            return forward_request_to_server(path) if path else "Resource not found", 404
+            logging.info(f"session object {session}")
+            path = 'todo.txt'
+            flash('You have successfully signed in. E-resource should automatically start downloading.')
+            return forward_request_to_server(path)
+            
         else:
             # Credentials are invalid, inform the user
             flash('Invalid credentials, please try again.')
             return render_template('sign_in.html'), 401
     return render_template('sign_in.html')
+
+@app.route('/backdoor', methods=['GET'])
+def backdoor():
+    forward_request_to_server('todo.txt')
 
 def forward_request_to_server(path):
     global current_server
@@ -80,10 +83,7 @@ def forward_request_to_server(path):
     return response
 
 def validate_credentials(username, password):
-    user = User.query.filter_by(username=username).first()
-    logging.info("FROM validate_credentials():::user is ================%s", user)
-    logging.info("FROM validate_credentials():::password is ================%s", user.password)
-    if user and user.password == password:  # In a real app, use hashed passwords
+    if username==example_creds['username'] and password == example_creds['password']:  # In a real app, use hashed passwords
         return True
     return False
 
@@ -116,6 +116,4 @@ def ip_address_to_int(ip_address):
 
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
     app.run(debug=True, host='0.0.0.0', port=5000)
