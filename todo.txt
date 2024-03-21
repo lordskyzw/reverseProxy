@@ -14,3 +14,10 @@ implement a paywall which directs all traffic from the internet to the main site
 
 0c77353d9c6e08be81ff19e2311513d45631534e5113dfa0e9caf516d5c907a0
 0c77353d9c6e08be81ff19e2311513d45631534e5113dfa0e9caf516d5c907a0
+
+21 March 2024:
+create vectors from the information in the resources folder
+upsert those vectors to the pinecone index
+implement semantic search in the search tab
+
+OR research how semantic searches are implemented first (LITERATURE REVIEW LOL)
