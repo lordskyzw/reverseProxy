@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif #3c4043;
+    text-align: center;
+}
+
+.centered {
+    text-align: center;
+}
+
+.search-form {
+    max-width: 584px;
+    margin: 0 auto;
+    position: relative; /* For positioning suggestions */
+}
+
+.search-bar {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    box-shadow: none;
+    outline: none;
+}
+
+.button {
+    padding: 10px 24px;
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    color: #3c4043;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: -5px; /* Align with search bar */
+}
+
+.button:hover {
+    border: 1px solid #c6c6c6;
+}
+
+/* Additional CSS for suggestions */
+.suggestions {
+    list-style: none;
+    padding: 0;
+    margin-top: 5px; /* Small space between search bar and suggestions */
+    background: white;
+    border: 1px solid #dfe1e5;
+    border-radius: 0 0 4px 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute; /* Ensure suggestions list overlays content below */
+    width: calc(100% - 40px); /* Account for padding */
+    z-index: 1000; /* Ensure list is above other content */
+}
+
+.suggestions li {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.suggestions li:hover {
+    background-color: #f6f6f6;
+}

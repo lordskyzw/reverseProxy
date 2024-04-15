@@ -21,3 +21,9 @@ upsert those vectors to the pinecone index
 implement semantic search in the search tab
 
 OR research how semantic searches are implemented first (LITERATURE REVIEW LOL)
+
+
+so the app itself shall be a single search page
+while a user searches, matching results shall be displayed
+when the user clicks for the resource, they shall be ran through the app's logic
+or when they finish and continue searching, semantic results will be returned and when they try to access the resource, they shall be ran through the app's logic!
